@@ -483,8 +483,8 @@
         scope.destinationsPage = _.string.startsWith($location.path(), '/destinations');
         scope.snippetsPage = _.string.startsWith($location.path(), '/query_snippets');
 
-        scope.showGroupsLink = currentUser.hasPermission('list_users');
-        scope.showUsersLink = currentUser.hasPermission('list_users');
+        scope.showGroupsLink = currentUser.hasPermission('admin');
+        scope.showUsersLink = currentUser.hasPermission('admin');
         scope.showDsLink = currentUser.hasPermission('admin');
         scope.showDestinationsLink = currentUser.hasPermission('admin');
       }]

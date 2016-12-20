@@ -41,25 +41,30 @@
   </div>
   {% endif %}
 
-  <form role="form" method="post" name="login">
-    <div class="form-group">
-      <label for="inputEmail">Email</label>
-      <input type="text" class="form-control" id="inputEmail" name="email" value="{{email}}">
+  <form role="form" method="post" name="login" class="form-login">
+    <div class="form-title text-center">
+      <p>abceed for publisher</p>
     </div>
-    <div class="form-group">
-      <label for="inputPassword">Password</label>
-      <input type="password" class="form-control" id="inputPassword" name="password">
-    </div>
-    <div class="checkbox pull-right">
-      <label>
-        <input type="checkbox" name="remember">
-        Remember me </label>
+    <div class="input-box">
+      <div class="form-group">
+        <input type="text" class="form-control" id="inputEmail" name="email" value="{{email}}" placeholder="ID">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="パスワード">
+      </div>
+      <div class="checkbox pull-right checkbox-remember">
+        <label>
+          <input type="checkbox" name="remember">
+          IDをブラウザに保存</label>
+      </div>
     </div>
 
-    <button type="submit" class="btn btn btn-primary">
+    <button type="submit" class="btn btn btn-primary btn-login">
       Log In
     </button>
   </form>
   <hr>
-  <a href="{{ url_for("redash.forgot_password", org_slug=org_slug) }}">I forgot my password</a>
+  <div class="forgot-password">
+    <a href="{{ url_for("redash.forgot_password", org_slug=org_slug) }}">IDまたはパスワードをお忘れですか？</a>
+  </div>
 {% endblock %}

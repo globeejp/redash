@@ -15,7 +15,7 @@
             ng-show="groupedDashboards.length > 0 || otherDashboards.length > 0 || currentUser.hasPermission('create_dashboard')"
             dropdown>
           <a href="#" class="dropdown-toggle" dropdown-toggle title="Dashboards">
-            <span class="visible-md visible-lg">Dashboards <b class="caret"></b></span>
+            <span class="visible-md visible-lg">ダッシュボード <b class="caret"></b></span>
             <span class="visible-xs visible-sm"><i class="zmdi zmdi-view-dashboard"></i> <b class="caret"></b></span>
           </a>
           <ul class="dropdown-menu" dropdown-menu>
@@ -38,14 +38,17 @@
                    ng-show="currentUser.hasPermission('create_dashboard')">New Dashboard</a></li>
           </ul>
         </li>
-        <li class="dropdown" ng-show="currentUser.hasPermission('view_query')" dropdown>
+        <li class="dropdown" ng-show="currentUser.hasPermission('admin')" dropdown>
           <a href="#" class="dropdown-toggle" dropdown-toggle>Queries <b class="caret"></b></a>
           <ul class="dropdown-menu" dropdown-menu>
-            <li ng-show="currentUser.hasPermission('create_query')"><a href="queries/new">New Query</a></li>
+            <li ng-show="currentUser.hasPermission('admin')"><a href="queries/new">New Query</a></li>
             <li><a href="queries">Queries</a></li>
           </ul>
         </li>
-        <li>
+        <li ng-show="currentUser.hasPermission('view_query')">
+          <a href="queries">データ</a>
+        </li>
+        <li ng-show="currentUser.hasPermission('admin')">
           <a href="alerts">Alerts</a>
         </li>
       </ul>
@@ -59,7 +62,7 @@
         <li ng-show="currentUser.hasPermission('admin')">
           <a href="data_sources" title="Data Sources"><i class="fa fa-database"></i></a>
         </li>
-        <li ng-show="currentUser.hasPermission('list_users')">
+        <li ng-show="currentUser.hasPermission('admin')">
           <a href="users" title="Settings"><i class="fa fa-cog"></i></a>
         </li>
         <li class="dropdown" dropdown>

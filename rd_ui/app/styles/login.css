@@ -3,33 +3,54 @@ body {
   background-color: #FFFFFF;
 }
 
+.brand-text {
+  text-align: left;
+  padding: 24px 12px;
+}
+
+.brand-text h1 {
+  font-size: 38px;
+  color: white;
+}
+
+@media (min-width: 750px) {
+  .brand-text {
+    text-align: left;
+    padding: 24px 48px;
+  }
+
+  .brand-text h1 {
+    font-size: 42px;
+    color: white;
+  }
+}
+
+.form-title {
+  margin-bottom: 20px;
+}
+
+.form-title p {
+  color: white;
+  font-size: 32px;
+  font-weight: 100;
+}
+
+
 .logo-container {
-  background-color: #668899;
+  background-color: #ff5a60;
   display: table;
   width: 100%;
   padding: 10px;
+  text-align: left;
+  position: absolute;
 }
 
 .content-container {
-  background-color: white;
+  background-color: #ff5a60;
   display: table;
   width: 100%;
   padding: 10px;
-  height: calc(100vh - 116px);
-}
-
-@media (min-width: 992px) {
-  .content-container {
-    height: 100%;
-    width: 60%;
-    float: left;
-  }
-
-  .logo-container {
-    height: 100%;
-    width: 40%;
-    float: right;
-  }
+  height: 100%;
 }
 
 .login-or {
@@ -67,3 +88,30 @@ img.login-button {
   margin-right: auto;
 }
 
+.form-login .form-control {
+  border-radius: 4px;
+  height: 40px;
+}
+
+.btn-login {
+  border-radius: 4px;
+  padding: 6px 18px;
+  font-size: 18px;
+}
+
+.input-box {
+  margin-bottom: 20px;
+}
+
+.checkbox-remember label {
+  color: white;
+}
+
+.forgot-password {
+  text-align: center;
+}
+
+.forgot-password a {
+  color: white;
+  font-weight: 600;
+}

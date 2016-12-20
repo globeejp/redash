@@ -115,11 +115,11 @@
     }
 
     $scope.tabs = [
-      {"name": "My Queries", "path": "queries/my", loader: loadMyQueries},
+      // {"name": "My Queries", "path": "queries/my", loader: loadMyQueries},
       {"path": "queries", "name": "All Queries", isActive: function(path) {
         return path === '/queries';
       }, "loader": loadAllQueries},
-      {"path": "queries/drafts", "name": "Drafts", loader: loadMyQueries},
+      // {"path": "queries/drafts", "name": "Drafts", loader: loadMyQueries},
     ];
 
     load();
