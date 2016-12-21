@@ -115,3 +115,13 @@ img.login-button {
   color: white;
   font-weight: 600;
 }
+
+.from-forgot-password label, p {
+  color: white;
+}
+
+.form-forgot-password .btn {
+  border-radius: 4px;
+  padding: 6px 18px;
+  font-size: 18px;
+}

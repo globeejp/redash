@@ -1,8 +1,8 @@
-Hi {{ user.name }},
+{{ invited.name }}　様
 
-You told us you forgot your password. If you really did, click here to choose a new one:
+以下のURLをクリックし、パスワード再設定手続きにお進みください:
 
 {{ reset_link }}
 
-If you didn't mean to reset your password, then you can just ignore this email; your password will not change.
+このメールに覚えのない場合、お手数ですが、このメールは破棄していただきますようお願いいたします。
 

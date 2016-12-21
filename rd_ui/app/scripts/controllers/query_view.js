@@ -95,7 +95,7 @@
     $scope.queryExecuting = false;
 
     $scope.isQueryOwner = (currentUser.id === $scope.query.user.id) || currentUser.hasPermission('admin');
-    $scope.canViewSource = currentUser.hasPermission('view_source');
+    $scope.canViewSource = currentUser.hasPermission('admin');
 
     $scope.canExecuteQuery = function() {
       return currentUser.hasPermission('execute_query') && !$scope.dataSource.view_only;

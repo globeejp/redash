@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<h2>Welcome to Re:dash!</h2>
+<h2 style="color: white;">ご登録ありがとうございます</h2>
 <p class="lead">
     {% if google_auth_url %}
     To create your account, please choose a password or login with your Google account ({{ user.email }}).
     {% else %}
-    To create your account, please choose a password.
+    パスワードを設定してください
     {% endif %}
 </p>
 {% with messages = get_flashed_messages() %}
@@ -26,11 +26,10 @@
     <span class="span-or">or</span>
 </div>
 {% endif %}
-<form role="form" method="post" name="invite">
+<form role="form" method="post" name="invite" class="from-forgot-password">
     <div class="form-group">
-        <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password">
     </div>
-    <button type="submit" class="btn btn btn-primary">Set Password</button>
+    <button type="submit" class="btn btn btn-primary">保存する</button>
 </form>
 {% endblock %}

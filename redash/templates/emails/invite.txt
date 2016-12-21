@@ -1,10 +1,11 @@
-Hi {{ invited.name }},
+{{ invited.name }}　様
 
-{{ inviter.name }} ({{inviter.email}}) invited you to join the Re:dash account of {{org.name}}.
+{{ inviter.name }} ({{inviter.email}}) abceed for publishersへ登録が完了しました。
 
-Use the following link to setup your account:
+以下のリンクよりアカウントの設定を完了して下さい:
 
 {{ invite_url }}
 
-Your sign-in email: {{invited.email}}
-Your Re:dash account: {{ url_for('redash.index', org_slug=org.slug, _external=True) }}
+ログイン情報
+ email: {{invited.email}}
+ account: {{ url_for('redash.index', org_slug=org.slug, _external=True) }}

@@ -86,7 +86,7 @@
 
     switch($location.path()) {
       case '/queries':
-        $scope.$parent.pageTitle = "Queries";
+        $scope.$parent.pageTitle = "メトリクス";
         // page title
         loader = loadQueries(Query.query);
         break;
@@ -114,13 +114,18 @@
       load();
     }
 
-    $scope.tabs = [
-      // {"name": "My Queries", "path": "queries/my", loader: loadMyQueries},
-      {"path": "queries", "name": "All Queries", isActive: function(path) {
-        return path === '/queries';
-      }, "loader": loadAllQueries},
-      // {"path": "queries/drafts", "name": "Drafts", loader: loadMyQueries},
-    ];
+    if (currentUser.hasPermission('admin')) {
+      $scope.tabs = [
+        {"name": "My Queries", "path": "queries/my", loader: loadMyQueries},
+        {"path": "queries", "name": "All Queries", isActive: function(path) {
+          return path === '/queries';
+        }, "loader": loadAllQueries},
+        {"path": "queries/drafts", "name": "Drafts", loader: loadMyQueries},
+      ];
+    } else {
+      $scope.tabs = [
+      ];
+    }
 
     load();
   }
