@@ -1,3 +1,106 @@
+# abceed-publisher-console
+
+Administration screen for publisher.
+customize redash and use it.
+
+Log in as an administrator and check the settings.
+https://publisher.abceed.com (admin / Globee612)
+
+
+## DB
+
+redash parses s3's log via redshift.
+
+So load s3 log into redshift.　(It is recommended to automate)
+Connect to redshift with postgresql client and do the following.
+
+host: cloudfront-log-analyze.czzjrseua4dw.ap-northeast-1.redshift.amazonaws.com
+database: cloudfrontlog
+password: Globee612
+port: 5439
+
+```
+COPY tmp_cf_accesslog
+  FROM 's3://log.cdn.abceed.com/E3U2OV1NEL2I0C.2016'
+    CREDENTIALS 'aws_access_key_id=AKIAI5XC7ZQ4NBQC2BWA;aws_secret_access_key=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'
+    DELIMITER '\t'
+    IGNOREHEADER 2 TRUNCATECOLUMNS TRIMBLANKS ACCEPTINVCHARS MAXERROR AS 1000 gzip
+    REGION 'ap-northeast-1';
+
+INSERT into sound_download_log
+SELECT
+(tmp_cf_accesslog.request_date || ' ' || tmp_cf_accesslog.request_time )::TIMESTAMP as request_timestamp,
+sound_download_log.request_timestamp as request_timestamp2
+FROM tmp_cf_accesslog
+LEFT JOIN sound_download_log
+   ON sound_download_log.x_edge_request_id = tmp_cf_accesslog.x_edge_request_id
+WHERE tmp_cf_accesslog.cs_uri_stem LIKE '%zip' AND sound_download_log.x_edge_request_id IS NULL;
+
+```
+
+If more publishers are added, we will add a view that only shows the publisher's data.
+Then add the user to the DB so that the author can see only the view.
+By connecting Redash with the user as a new data source, we realize multi-tenancy.
+
+```
+create view yadokari_sound_download_log as
+select
+   *
+from sound_download_log
+LEFT JOIN book ON book.id_book = sound_download_log.book_id
+where publisher='やどかり出版';
+```
+
+The following users are already registered. (user id / pass)
+
+* asahi / Ks6nBiQc
+* yadokari / nW29qcGU
+
+Please check DB's pg_shadow table for details.
+
+
+## Deployed on AWS EC2
+
+instance name : redash-a-02
+instance id : i-0a3b59da101d1970a
+ssh-key : ./redash-a-02.pem
+
+> if you login, user root dir [~/] has [/redash] directory.
+> Please pull the source latest code.
+
+
+/opt/redash is runnning code. The following is set.
+
+```
+$ cat /opt/redash/.env 
+#export REDASH_STATIC_ASSETS_PATH="../rd_ui/dist/"
+export REDASH_LOG_LEVEL="INFO"
+export REDASH_REDIS_URL=redis://localhost:6379/0
+export REDASH_DATABASE_URL="postgresql://redash"
+export REDASH_COOKIE_SECRET=aew1Wah3wahquahBeex6Ohfi7tailee5
+
+export REDASH_NAME="abceed for publisher"
+export REDASH_MAIL_SERVER="smtp.gmail.com"
+export REDASH_MAIL_PORT="465"
+export REDASH_MAIL_USE_TLS="false" # default: false
+export REDASH_MAIL_USE_SSL="true" # default: false
+export REDASH_MAIL_USERNAME="info@globeejp.com" # default: None
+export REDASH_MAIL_PASSWORD="globee1955" # default: None
+export REDASH_MAIL_DEFAULT_SENDER="info@globeejp.com" # Email address to send from
+
+export REDASH_DATE_FORMAT="YYYY/MM/DD"
+export REDASH_HOST="http://publisher.abceed.com/"
+
+
+export REDASH_STATIC_ASSETS_PATH="/home/ubuntu/redash/rd_ui/app/"
+#export REDASH_STATIC_ASSETS_PATH="/opt/redash/redash.1.0.0.b2521/rd_ui_old/dist/"
+
+#export REDASH_CORS_ACCESS_CONTROL_ALLOW_ORIGIN="*"
+#export REDASH_CORS_ACCESS_CONTROL_ALLOW_CREDENTIALS="true"
+```
+
+# Original README
+
 <p align="center">
   <img title="Redash" src='http://redash.io/static/old_img/redash_logo.png' width="200px"/>
 </p>
